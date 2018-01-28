@@ -23,6 +23,10 @@ $cell-size: ($field-width - $grid-spacing * ($grid-row-cells + 1)) / $grid-row-c
   }
 }
 
+.pointer {
+  cursor: pointer;
+}
+
 .filled {
   background: $filled-color;
 }

@@ -3,22 +3,28 @@ import { connect } from 'react-redux';
 
 import styles from './Grid';
 import Cell from '../../components/Cell';
+import { startGame } from '../../actions';
 
 class Grid extends Component {
 
+  constructor(props) {
+    super(props);
+    this.onCellClick = this.onCellClick.bind(this);
+  }
+
   onCellClick(cell) {
-    console.log(cell)
+    this.props.startGame(cell);
   }
 
   renderCells() {
-    const { grid } = this.props;
+    const { grid, gameStarted } = this.props;
     return grid.map((row, index) => {
       return (
         <div className={styles['grid-row']} key={index}>
           {
             row.map(cell => {
               return (
-                <Cell key={cell.key} cell={cell} onCellClick={this.onCellClick} />
+                <Cell key={cell.key} cell={cell} onCellClick={this.onCellClick} gameStarted={gameStarted}  />
               )
             })
           }
@@ -40,9 +46,10 @@ class Grid extends Component {
 
 const mapStateToProps = (state) => {
   return { 
-    grid: state.game.grid
+    grid: state.game.grid,
+    gameStarted: state.game.started,
   };
 }
 
-export default connect(mapStateToProps, null)(Grid);
+export default connect(mapStateToProps, {startGame})(Grid);
 
