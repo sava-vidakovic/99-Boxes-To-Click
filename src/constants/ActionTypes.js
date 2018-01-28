@@ -1,1 +1,1 @@
-export const START_GAME = 'START_GAME'
+export const GRID_CHANGED = 'GRID_CHANGED'

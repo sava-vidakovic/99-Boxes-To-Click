@@ -1,0 +1,13 @@
+@mixin transform($args...) {
+  -webkit-transform: $args;
+  -moz-transform: $args;
+  -ms-transform: $args;
+  transform: $args;
+}
+
+// Media queries
+@mixin smaller($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}

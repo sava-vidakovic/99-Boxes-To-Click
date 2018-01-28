@@ -11,7 +11,6 @@ import App from './containers/App';
 const store = createStore(reducers, applyMiddleware(thunk));
 const rootElement = document.getElementById('root');
 
-
 ReactDOM.render(
   <Provider store={store}>
     <App />

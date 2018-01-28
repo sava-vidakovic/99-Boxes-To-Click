@@ -1,0 +1,56 @@
+@import '../../styles/_variables';
+@import '../../styles/_mixins';
+
+$cell-color: #eee4da;
+$filled-color: #ede0c8;
+$completed-color: #f3b278;
+$cell-border-radius: 3px;
+$cell-size: ($field-width - $grid-spacing * ($grid-row-cells + 1)) / $grid-row-cells;
+
+.cell {
+  background: rgba($cell-color, .35);
+  width: $cell-size;
+  height: $cell-size;
+  margin-right: $grid-spacing;
+  float: left;
+  border-radius: $cell-border-radius;
+  transition: background 0.3s ease;
+  &:hover {
+    background: gray;
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.filled {
+  background: $filled-color;
+}
+
+.completed {
+  background: $completed-color;
+}
+
+.active {
+  background: #f3b278;
+}
+
+.clickable {
+  background: #ede0c8;
+  cursor: pointer;
+}
+
+@mixin cell-field { 
+  .grid {
+    width: $field-width;
+    height: $field-width;
+  }
+}
+
+@include smaller($mobile-threshold) {
+  $cell-size: ($field-width-mobile - $grid-spacing * ($grid-row-cells + 1)) / $grid-row-cells;
+  .cell {
+    width: $cell-size;
+    height: $cell-size;
+  }
+}

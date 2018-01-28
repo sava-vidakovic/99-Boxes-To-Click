@@ -1,0 +1,41 @@
+
+@import '../../styles/_variables';
+@import '../../styles/_mixins';
+
+$grid-border-radius: 6px;
+
+.grid {
+  width: $field-width;
+  height: $field-width;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #bbada0;
+  padding: 5px;
+  border-radius: $grid-border-radius;
+}
+
+.grid-row {
+  margin-bottom: $grid-spacing;
+
+  &:first-child {
+    margin-top: 5px;
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+@include smaller($mobile-threshold) {
+  .grid {
+    width: $field-width-mobile;
+    height: $field-width-mobile;
+  }
+}
