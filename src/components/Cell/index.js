@@ -2,13 +2,19 @@ import React from 'react';
 
 import styles from './Cell';
 
-const getClasses = (cell, gameStarted) => {
+const getClasses = (cell, gameStarted, active, canClick) => {
   let classes = [styles.cell];
-  const possibleStates = ['filled', 'completed', 'active', 'clickable'];
+  const possibleCellStates = ['filled', 'completed'];
   if(!gameStarted) {
     classes.push(styles.pointer)
   }
-  possibleStates.forEach(state => {
+  if(active && active.key === cell.key) {
+    classes.push(styles.active)
+  }
+  if(canClick) {
+    classes.push(styles.clickable);
+  }
+  possibleCellStates.forEach(state => {
     if(cell[state]) {
       classes.push(styles[state]);
     }
@@ -16,8 +22,12 @@ const getClasses = (cell, gameStarted) => {
   return classes.join(' ');
 }
 
-const Cell = ({ onCellClick, cell, isActive, gameStarted }) => {
-  return <div className={[getClasses(cell, gameStarted)]} onClick={() => onCellClick(cell)} />
+const Cell = ({ onCellClick, cell, isActive, gameStarted, currentActiveCell, canClick }) => {
+  return (
+    <div 
+      className={[getClasses(cell, gameStarted, currentActiveCell, canClick)]} 
+      onClick={() => onCellClick(cell)} />
+  );
 }
 
 export default Cell;

@@ -2,7 +2,6 @@
 @import '../../styles/_mixins';
 
 $cell-color: #eee4da;
-$filled-color: #ede0c8;
 $completed-color: #f3b278;
 $cell-border-radius: 3px;
 $cell-size: ($field-width - $grid-spacing * ($grid-row-cells + 1)) / $grid-row-cells;
@@ -28,7 +27,7 @@ $cell-size: ($field-width - $grid-spacing * ($grid-row-cells + 1)) / $grid-row-c
 }
 
 .filled {
-  background: $filled-color;
+  background: $cell-color;
 }
 
 .completed {
