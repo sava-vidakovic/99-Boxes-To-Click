@@ -19,7 +19,7 @@ export default (state = INITIAL_STATE, action) => {
     case GRID_CHANGED:
       return { ...state, grid: action.payload };
     case LEVEL_STARTED:
-      return { ...state, started: true, level: action.payload };
+      return { ...state, started: true };
     case SET_ACTIVE:
       return { ...state, currentActive: action.payload };
     default:

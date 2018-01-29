@@ -21,12 +21,12 @@ const setActive = cell => {
 }
 
 export const startGame = cell => (dispatch, getState) => {
-  const { grid } = getState().game;
+  const { grid, level } = getState().game;
   const { x, y } = cell.position;
   let gameGrid = _.cloneDeep(grid);
   gameGrid[x][y].filled = true;
   gameGrid[x][y].completed = true;
-  gameGrid = generateLevel(gameGrid, cell, 15);
+  gameGrid = generateLevel(gameGrid, cell, level);
   dispatch({ type: LEVEL_STARTED });
   dispatch(gridChanged(gameGrid));
   dispatch(setActive(cell));
