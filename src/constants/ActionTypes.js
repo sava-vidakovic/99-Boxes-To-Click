@@ -4,3 +4,4 @@ export const SET_ACTIVE = 'SET_ACTIVE';
 export const TIMER_START = 'TIMER_START';
 export const TIMER_STOP = 'TIMER_STOP';
 export const TIMER_TICK = 'TIMER_TICK';
+export const TOGGLE_WELCOME_DIALOG = 'TOGGLE_WELCOME_DIALOG';
