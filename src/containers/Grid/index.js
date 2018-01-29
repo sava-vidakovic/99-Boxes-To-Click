@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import styles from './Grid';
 import Cell from '../../components/Cell';
-import { startGame, closeCell } from '../../actions';
+import { startGame, closeCell, startTimer } from '../../actions';
 import { getPossibleMoves } from '../../selectors'
 
 class Grid extends Component {
@@ -20,11 +20,12 @@ class Grid extends Component {
   }
 
   onCellClick(cell) {
-    const { startGame, gameStarted } = this.props;
+    const { startGame, gameStarted, startTimer } = this.props;
     if(gameStarted) {
       this.closeCell(cell);
     } else {
       startGame(cell);
+      startTimer();
     }
   }
 
@@ -80,4 +81,4 @@ const mapStateToProps = (state) => {
   };
 }
 
-export default connect(mapStateToProps, { startGame, closeCell })(Grid);
+export default connect(mapStateToProps, { startGame, closeCell, startTimer })(Grid);

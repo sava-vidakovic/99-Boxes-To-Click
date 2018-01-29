@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+
 import styles from './GameStats.scss';
 
 class GameStats extends Component {
@@ -7,7 +9,7 @@ class GameStats extends Component {
       <div className={styles.container}>
         <div className={styles.item}>
           <div className={styles.title}>Timer</div>
-          <div className={styles.value}>12 sec</div>
+          <div className={styles.value}>{this.props.time} sec</div>
         </div>
         <div className={styles.item}>
           <div className={styles.title}>Left</div>
@@ -26,4 +28,11 @@ class GameStats extends Component {
   }
 }
 
-export default GameStats;
+const mapStateToProps = ({timer}) => {
+  return { 
+    time: timer.time,
+  };
+}
+
+export default connect(mapStateToProps)(GameStats);
+
