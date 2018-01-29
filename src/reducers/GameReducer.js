@@ -10,6 +10,7 @@ import { generageGrid } from '../lib/game';
 const INITIAL_STATE = {
   grid: generageGrid(),
   started: false,
+  lives: 1,
   level: 1,
   currentActive: null,
 };

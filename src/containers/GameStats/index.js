@@ -18,7 +18,7 @@ class GameStats extends Component {
         </div>
         <div className={styles.item}>
           <div className={styles.title}>Lives</div>
-          <div className={styles.value}>12</div>
+          <div className={styles.value}>{this.props.lives}</div>
         </div>
         <div className={styles.item}>
           <div className={styles.title}>Level</div>
@@ -33,7 +33,8 @@ const mapStateToProps = (state) => {
   return { 
     time: state.timer.time,
     left: incompleteCells(state),
-    level: state.game.level
+    level: state.game.level,
+    lives: state.game.lives
   };
 }
 
