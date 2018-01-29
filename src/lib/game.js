@@ -84,6 +84,16 @@ export const inRange = (grid, selectedCell) => {
   return inRange;
 }
 
+export const incompletedCells = grid => {
+  let incompleted = [];
+  eachCell(grid, cell => {
+    if(cell.filled && !cell.completed) {
+      incompleted.push(cell)
+    }
+  })
+  return incompleted;
+}
+
 export const distance = (from, to) => {
   const x1 = from.position.x;
   const y1 = from.position.y;

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import styles from './GameStats.scss';
+import { incompleteCells } from '../../selectors';
 
 class GameStats extends Component {
   render() {
@@ -13,7 +14,7 @@ class GameStats extends Component {
         </div>
         <div className={styles.item}>
           <div className={styles.title}>Left</div>
-          <div className={styles.value}>12</div>
+          <div className={styles.value}>{this.props.left}</div>
         </div>
         <div className={styles.item}>
           <div className={styles.title}>Lives</div>
@@ -28,9 +29,10 @@ class GameStats extends Component {
   }
 }
 
-const mapStateToProps = ({timer}) => {
+const mapStateToProps = (state) => {
   return { 
-    time: timer.time,
+    time: state.timer.time,
+    left: incompleteCells(state)
   };
 }
 
