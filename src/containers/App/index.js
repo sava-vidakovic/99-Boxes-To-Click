@@ -5,28 +5,25 @@ import styles from './App.scss';
 import Grid from '../Grid';
 import GameStats from '../GameStats';
 import WelcomeDialog from '../../components/WelcomeDialog';
-import { toogleWelcomeDialog } from '../../actions';
+import LevelCompletedDialog from '../../components/LevelCompletedDialog';
+import { toggleDialog } from '../../actions';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.toggleWelcomeDialog = this.toggleWelcomeDialog.bind(this);
-  }
-
-  toggleWelcomeDialog() {
-    this.props.toogleWelcomeDialog();
-  }
 
   render() {
-    const { showWelcomeDialog } = this.props;
+    const { showWelcomeDialog, toggleDialog, showLevelCompletedDialog, level } = this.props;
     return (
       <div className={styles.app}>
         <Grid />
         <GameStats />
         <WelcomeDialog 
           show={showWelcomeDialog} 
-          onConfirm={this.toggleWelcomeDialog} />
+          onConfirm={() => toggleDialog('welcome')} />
+        <LevelCompletedDialog 
+          show={showLevelCompletedDialog} 
+          onConfirm={() => toggleDialog('levelCompleted')} 
+          level={level}
+          />  
       </div>
     );
   }
@@ -35,9 +32,11 @@ class App extends Component {
 const mapStateToProps = ({game, dialogs}) => {
   return { 
     gameStarted: game.started,
-    showWelcomeDialog: dialogs.welcomeDialog
+    level: game.level,
+    showWelcomeDialog: dialogs.welcome,
+    showLevelCompletedDialog: dialogs.levelCompleted,
   };
 }
 
-export default connect(mapStateToProps, { toogleWelcomeDialog })(App);
+export default connect(mapStateToProps, { toggleDialog })(App);
 

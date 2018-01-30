@@ -1,10 +1,16 @@
 import _ from 'lodash';
 import { 
-  LEVEL_STARTED, 
   GRID_CHANGED,
-  SET_ACTIVE
+  SET_ACTIVE,
+  LEVEL_STARTED, 
+  LEVEL_COMPLETED,
+  LEVEL_FAILED,
+  GAME_OVER,
+  ADD_LIFE,
 } from '../constants/ActionTypes';
 import { generateLevel } from '../lib/game';
+import { stopTimer } from './TimerActions';
+import { getIncompleteCells } from '../selectors';
 
 const gridChanged = grid => {
   return {
@@ -41,4 +47,24 @@ export const closeCell = cell => (dispatch, getState) => {
   gameGrid[x][y].completed = true;
   dispatch(setActive(cell));
   dispatch(gridChanged(gameGrid));
+}
+
+export const completeLevel = () => dispatch => {
+  dispatch({ type: LEVEL_COMPLETED });
+  dispatch({ type: ADD_LIFE, payload: 1 });
+  dispatch(stopTimer());
+}
+
+export const levelFailed = () => (dispatch, getState) => {
+  const state = getState();
+  const { lives, } = state.game;
+  const incompletedCells = getIncompleteCells(state);
+  const newLives = lives - incompletedCells;
+  dispatch(stopTimer());
+  if(newLives <= 0) {
+    dispatch({ type: GAME_OVER });
+  } else{
+    dispatch({ type: LEVEL_FAILED, payload: newLives });
+  }
+
 }

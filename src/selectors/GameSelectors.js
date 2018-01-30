@@ -13,6 +13,6 @@ export const getPossibleMoves = createSelector(
   } 
 )
 
-export const incompleteCells = createSelector(
+export const getIncompleteCells = createSelector(
   [ getGrid ], (grid) => incompletedCells(grid).length
 )

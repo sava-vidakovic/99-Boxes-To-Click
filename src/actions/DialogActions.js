@@ -1,9 +1,10 @@
 import { 
-  TOGGLE_WELCOME_DIALOG,
+  TOGGLE_DIALOG,
 } from '../constants/ActionTypes';
 
-export const toogleWelcomeDialog = () => {
+export const toggleDialog = (dialog) => {
   return {
-    type: TOGGLE_WELCOME_DIALOG
+    type: TOGGLE_DIALOG,
+    payload: dialog
   }
 }

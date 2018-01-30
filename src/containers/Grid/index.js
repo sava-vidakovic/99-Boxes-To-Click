@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 import styles from './Grid';
 import Cell from '../../components/Cell';
-import { startGame, closeCell, startTimer } from '../../actions';
-import { getPossibleMoves } from '../../selectors'
+import { startGame, closeCell, startTimer, completeLevel, levelFailed } from '../../actions';
+import { getPossibleMoves, getIncompleteCells } from '../../selectors'
 
 class Grid extends Component {
 
@@ -12,6 +12,25 @@ class Grid extends Component {
     super(props);
     this.onCellClick = this.onCellClick.bind(this);
     this.canClick = this.canClick.bind(this);
+  }
+
+  componentDidUpdate() {
+    this.completeLevel();
+    this.gameOver();
+  }
+
+  completeLevel() {
+    const { gameStarted, possibleMoves, leftCells, completeLevel } = this.props;
+    if(gameStarted && possibleMoves.length === 0 && leftCells === 0) {
+      completeLevel();
+    }
+  }
+
+  gameOver() {
+    const { gameStarted, possibleMoves, leftCells, levelFailed } = this.props;
+    if(gameStarted && possibleMoves.length === 0 && leftCells > 0) {
+      levelFailed();
+    }
   }
 
   canClick(cell) {
@@ -77,8 +96,15 @@ const mapStateToProps = (state) => {
     grid: state.game.grid,
     gameStarted: state.game.started,
     currentActiveCell: state.game.currentActive,
-    possibleMoves: getPossibleMoves(state)
+    possibleMoves: getPossibleMoves(state),
+    leftCells: getIncompleteCells(state)
   };
 }
 
-export default connect(mapStateToProps, { startGame, closeCell, startTimer })(Grid);
+export default connect(mapStateToProps, { 
+    startGame, 
+    closeCell, 
+    startTimer, 
+    completeLevel,
+    levelFailed,
+})(Grid);

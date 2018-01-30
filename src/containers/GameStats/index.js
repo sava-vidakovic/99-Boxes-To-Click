@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import styles from './GameStats.scss';
-import { incompleteCells } from '../../selectors';
+import { getIncompleteCells } from '../../selectors';
 
 class GameStats extends Component {
   render() {
@@ -32,7 +32,7 @@ class GameStats extends Component {
 const mapStateToProps = (state) => {
   return { 
     time: state.timer.time,
-    left: incompleteCells(state),
+    left: getIncompleteCells(state),
     level: state.game.level,
     lives: state.game.lives
   };

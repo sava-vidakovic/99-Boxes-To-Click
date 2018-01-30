@@ -1,7 +1,11 @@
 export const GRID_CHANGED = 'GRID_CHANGED';
 export const LEVEL_STARTED = 'LEVEL_STARTED';
+export const LEVEL_COMPLETED = 'LEVEL_COMPLETED';
+export const LEVEL_FAILED = 'LEVEL_FAILED';
+export const GAME_OVER = 'GAME_OVER';
+export const ADD_LIFE = 'ADD_LIFE';
 export const SET_ACTIVE = 'SET_ACTIVE';
 export const TIMER_START = 'TIMER_START';
 export const TIMER_STOP = 'TIMER_STOP';
 export const TIMER_TICK = 'TIMER_TICK';
-export const TOGGLE_WELCOME_DIALOG = 'TOGGLE_WELCOME_DIALOG';
+export const TOGGLE_DIALOG = 'TOGGLE_DIALOG';

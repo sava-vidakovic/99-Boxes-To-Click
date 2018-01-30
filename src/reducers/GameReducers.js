@@ -1,6 +1,10 @@
 import {
   GRID_CHANGED,
   LEVEL_STARTED,
+  LEVEL_COMPLETED,
+  LEVEL_FAILED,
+  GAME_OVER,
+  ADD_LIFE,
   SET_ACTIVE,
 } from '../constants/ActionTypes';
 
@@ -21,6 +25,14 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, grid: action.payload };
     case LEVEL_STARTED:
       return { ...state, started: true };
+    case LEVEL_COMPLETED:
+      return { ...state, started: false, level: state.level + 1, grid: generageGrid(), currentActive: null };
+    case LEVEL_FAILED:
+      return { ...state, started: false, grid: generageGrid(), currentActive: null, lives: action.payload};
+    case GAME_OVER:
+      return { ...state, ...INITIAL_STATE };
+    case ADD_LIFE:
+      return { ...state, lives: action.payload + state.lives };
     case SET_ACTIVE:
       return { ...state, currentActive: action.payload };
     default:

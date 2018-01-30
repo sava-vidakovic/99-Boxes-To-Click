@@ -1,16 +1,20 @@
 import {
-  TOGGLE_WELCOME_DIALOG,
+  TOGGLE_DIALOG,
+  LEVEL_COMPLETED,
 } from '../constants/ActionTypes';
 
 
 const INITIAL_STATE = {
-  welcomeDialog: true,
+  welcome: true,
+  levelCompleted: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case TOGGLE_WELCOME_DIALOG:
-      return { ...state, welcomeDialog: !state.welcomeDialog };
+    case TOGGLE_DIALOG:
+      return { ...state, [action.payload]: !state[action.payload] };
+    case LEVEL_COMPLETED:
+      return { ...state, levelCompleted: true };
     default:
       return state;
   }
