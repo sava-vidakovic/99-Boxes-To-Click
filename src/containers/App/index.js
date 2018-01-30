@@ -6,6 +6,7 @@ import Grid from '../Grid';
 import GameStats from '../GameStats';
 import WelcomeDialog from '../../components/WelcomeDialog';
 import LevelCompletedDialog from '../../components/LevelCompletedDialog';
+import LevelFailedDialog from '../../components/LevelFailedDialog/';
 import GameOverDialog from '../../components/GameOverDialog';
 import { toggleDialog } from '../../actions';
 
@@ -15,7 +16,8 @@ class App extends Component {
     const { 
       showWelcomeDialog, 
       toggleDialog, 
-      showLevelCompletedDialog, 
+      showLevelCompletedDialog,
+      showLevelFailDialog,
       level, 
       showGameOverDialog 
     } = this.props;
@@ -34,6 +36,10 @@ class App extends Component {
         <GameOverDialog
           show={showGameOverDialog}
           onConfirm={() => toggleDialog('gameOver')} />
+        <LevelFailedDialog
+          show={showLevelFailDialog}
+          onConfirm={() => toggleDialog('levelFailed')} 
+          level={level} />  
       </div>
     );
   }
@@ -45,6 +51,7 @@ const mapStateToProps = ({game, dialogs}) => {
     level: game.level,
     showWelcomeDialog: dialogs.welcome,
     showLevelCompletedDialog: dialogs.levelCompleted,
+    showLevelFailDialog: dialogs.levelFailed,
     showGameOverDialog: dialogs.gameOver,
   };
 }
