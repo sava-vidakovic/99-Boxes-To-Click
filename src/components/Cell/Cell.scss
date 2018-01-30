@@ -40,6 +40,7 @@ $cell-size: ($field-width - $grid-spacing * ($grid-row-cells + 1)) / $grid-row-c
 
 .clickable {
   background: #ede0c8;
+  @include animation('jiggle 0.2s infinite');
   cursor: pointer;
 }
 
