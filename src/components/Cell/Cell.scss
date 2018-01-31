@@ -3,6 +3,8 @@
 
 $cell-color: #eee4da;
 $completed-color: #f3b278;
+$active-color: #f3b278;
+$cliktable-color: #f7ddae;
 $cell-border-radius: 3px;
 $cell-size: ($field-width - $grid-spacing * ($grid-row-cells + 1)) / $grid-row-cells;
 
@@ -35,11 +37,11 @@ $cell-size: ($field-width - $grid-spacing * ($grid-row-cells + 1)) / $grid-row-c
 }
 
 .active {
-  background: #f3b278;
+  background: $active-color;
 }
 
 .clickable {
-  background: #ede0c8;
+  background: $cliktable-color;
   @include animation('jiggle 0.2s infinite');
   cursor: pointer;
 }

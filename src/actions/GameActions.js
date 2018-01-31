@@ -5,10 +5,13 @@ import {
   LEVEL_STARTED, 
   LEVEL_COMPLETED,
   LEVEL_FAILED,
+  SET_LEVEL,
   GAME_OVER,
   ADD_LIFE,
+  UPDATE_MAX_LEVEL,
 } from '../constants/ActionTypes';
 import { generateLevel } from '../lib/game';
+import LocalStorage from '../lib/localStorage';
 import { stopTimer } from './TimerActions';
 import { getIncompleteCells } from '../selectors';
 
@@ -24,6 +27,23 @@ const setActive = cell => {
     type: SET_ACTIVE,
     payload: cell
   }
+}
+
+export const setLevel = level => {
+  return {
+    type: SET_LEVEL,
+    payload: level,
+  }
+}
+
+const setMaxLevel = currentLevel => (dispatch, getState) => {
+  const maxLevel = getState().game.maxLevel;
+  const level = currentLevel > maxLevel ? currentLevel : maxLevel;
+  LocalStorage.saveMaxLevel(level);
+  dispatch({
+    type: UPDATE_MAX_LEVEL,
+    payload: level,
+  })
 }
 
 export const startGame = cell => (dispatch, getState) => {
@@ -49,10 +69,12 @@ export const closeCell = cell => (dispatch, getState) => {
   dispatch(gridChanged(gameGrid));
 }
 
-export const completeLevel = () => dispatch => {
+export const completeLevel = () => (dispatch, getState) => {
   dispatch({ type: LEVEL_COMPLETED });
   dispatch({ type: ADD_LIFE, payload: 1 });
   dispatch(stopTimer());
+  const { game } = getState();
+  dispatch(setMaxLevel(game.level));
 }
 
 export const levelFailed = () => (dispatch, getState) => {

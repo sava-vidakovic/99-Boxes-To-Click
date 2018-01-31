@@ -6,16 +6,26 @@ import {
   GAME_OVER,
   ADD_LIFE,
   SET_ACTIVE,
+  UPDATE_MAX_LEVEL,
+  SET_LEVEL,
 } from '../constants/ActionTypes';
 
 import { generateGrid } from '../lib/game';
+import LocalStorage from '../lib/localStorage';
 
+const startLevel = parseInt(process.env.REACT_APP_START_LEVEL, 10) || 1;
+const maxLevel = LocalStorage.getMaxLevel();
+
+if(startLevel > maxLevel) {
+  LocalStorage.saveMaxLevel(startLevel);
+}
 
 const INITIAL_STATE = {
   grid: generateGrid(),
   started: false,
   lives: 1,
-  level: 1,
+  level: startLevel,
+  maxLevel: maxLevel,
   currentActive: null,
 };
 
@@ -29,6 +39,10 @@ export default (state = INITIAL_STATE, action) => {
       return { ...state, started: false, level: state.level + 1, grid: generateGrid(), currentActive: null };
     case LEVEL_FAILED:
       return { ...state, started: false, grid: generateGrid(), currentActive: null, lives: action.payload};
+    case UPDATE_MAX_LEVEL:
+      return { ...state, maxLevel: action.payload}
+    case SET_LEVEL:
+      return { ...state, level: action.payload }  
     case GAME_OVER:
       return { ...state, ...INITIAL_STATE };
     case ADD_LIFE:

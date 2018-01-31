@@ -8,9 +8,21 @@ import WelcomeDialog from '../../components/WelcomeDialog';
 import LevelCompletedDialog from '../../components/LevelCompletedDialog';
 import LevelFailedDialog from '../../components/LevelFailedDialog/';
 import GameOverDialog from '../../components/GameOverDialog';
-import { toggleDialog } from '../../actions';
+import { toggleDialog, setLevel } from '../../actions';
+import { getCompletedLevel } from '../../selectors';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.onLevelSelected = this.onLevelSelected.bind(this);
+  }
+
+  onLevelSelected(level) {
+    const { setLevel, toggleDialog } = this.props;
+    console.log(level)
+    setLevel(level);
+    toggleDialog('welcome');
+  }
 
   render() {
     const { 
@@ -18,7 +30,9 @@ class App extends Component {
       toggleDialog, 
       showLevelCompletedDialog,
       showLevelFailDialog,
-      level, 
+      level,
+      maxLevel,
+      completedLevel,
       showGameOverDialog 
     } = this.props;
 
@@ -27,12 +41,15 @@ class App extends Component {
         <Grid />
         <GameStats />
         <WelcomeDialog 
-          show={showWelcomeDialog} 
+          show={showWelcomeDialog}
+          defaultLevel={level}
+          maxLevel={maxLevel}
+          onLevelSelected={this.onLevelSelected}
           onConfirm={() => toggleDialog('welcome')} />
         <LevelCompletedDialog 
           show={showLevelCompletedDialog} 
           onConfirm={() => toggleDialog('levelCompleted')} 
-          level={level} />
+          level={completedLevel} />
         <GameOverDialog
           show={showGameOverDialog}
           onConfirm={() => toggleDialog('gameOver')} />
@@ -45,16 +62,21 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ({game, dialogs}) => {
+const mapStateToProps = (state) => {
+  const { game, dialogs } = state;
+  const { started, level, maxLevel } = game;
+  const { welcome, levelCompleted, levelFailed, gameOver } = dialogs;
   return { 
-    gameStarted: game.started,
-    level: game.level,
-    showWelcomeDialog: dialogs.welcome,
-    showLevelCompletedDialog: dialogs.levelCompleted,
-    showLevelFailDialog: dialogs.levelFailed,
-    showGameOverDialog: dialogs.gameOver,
+    gameStarted: started,
+    level: level,
+    maxLevel: maxLevel,
+    completedLevel: getCompletedLevel(state),
+    showWelcomeDialog: welcome,
+    showLevelCompletedDialog: levelCompleted,
+    showLevelFailDialog: levelFailed,
+    showGameOverDialog: gameOver,
   };
 }
 
-export default connect(mapStateToProps, { toggleDialog })(App);
+export default connect(mapStateToProps, { toggleDialog, setLevel })(App);
 
