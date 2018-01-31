@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 
 
 import 'sweetalert/dist/sweetalert.css';
-
+// import * from './styles/sweetAlert.scss';
 import './index.scss';
 import reducers from './reducers/';
 import App from './containers/App';

@@ -1,5 +1,7 @@
 @import './styles/_variables';
 
+:global { @import './styles/sweetAlert.scss'; }
+
 body {
   background: #faf8ef;
   font-family: 'Open Sans', sans-serif;

@@ -7,6 +7,7 @@ const LevelCompletedDialog = ({show, onConfirm, level}) => {
     <SweetAlert
       show={show}
       title={msg}
+      type="success"
       text="Get ready for next level!"
       onConfirm={onConfirm}
     />

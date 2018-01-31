@@ -6,7 +6,8 @@ const LevelFailedDialog = ({show, onConfirm, level}) => {
   return (
     <SweetAlert
       show={show}
-      title="Fail"
+      title=""
+      type="warning"
       html={true}
       text={msg}
       onConfirm={onConfirm}

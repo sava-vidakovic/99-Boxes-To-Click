@@ -6,6 +6,7 @@ const GameOverDialog = ({show, onConfirm}) => {
     <SweetAlert
       show={show}
       title="Game Over"
+      type="error"
       text="Better luck next time!"
       onConfirm={onConfirm}
     />
