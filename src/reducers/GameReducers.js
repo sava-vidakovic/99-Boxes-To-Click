@@ -8,11 +8,11 @@ import {
   SET_ACTIVE,
 } from '../constants/ActionTypes';
 
-import { generageGrid } from '../lib/game';
+import { generateGrid } from '../lib/game';
 
 
 const INITIAL_STATE = {
-  grid: generageGrid(),
+  grid: generateGrid(),
   started: false,
   lives: 1,
   level: 1,
@@ -26,9 +26,9 @@ export default (state = INITIAL_STATE, action) => {
     case LEVEL_STARTED:
       return { ...state, started: true };
     case LEVEL_COMPLETED:
-      return { ...state, started: false, level: state.level + 1, grid: generageGrid(), currentActive: null };
+      return { ...state, started: false, level: state.level + 1, grid: generateGrid(), currentActive: null };
     case LEVEL_FAILED:
-      return { ...state, started: false, grid: generageGrid(), currentActive: null, lives: action.payload};
+      return { ...state, started: false, grid: generateGrid(), currentActive: null, lives: action.payload};
     case GAME_OVER:
       return { ...state, ...INITIAL_STATE };
     case ADD_LIFE:

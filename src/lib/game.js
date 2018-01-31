@@ -9,7 +9,7 @@ export const generateCell = (x,y) => {
   }
 };
 
-export const generageGrid = (size = 10) => {
+export const generateGrid = (size = 10) => {
   let grid = [];
   for (let x = 0; x < size; x++) {
     let row = grid[x] = [];
