@@ -2,8 +2,7 @@
 # 99 Boxes To Click
 Relaxing puzzle game to help you zone out from the world.
 
-![alt text](https://raw.githubusercontent.com/sava-vidakovic/99-Boxes-To-Click/master/screenshot.jpg)
-
+<img src="https://raw.githubusercontent.com/sava-vidakovic/99-Boxes-To-Click/master/screenshot.jpg" width="300">
 ## Installing / Getting started
 
 ### Prerequisites
@@ -32,6 +31,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.
 You will also see any lint errors in the console.
 
-### `npm test`
+### `yarn test`
 
 Launches the test runner in the interactive watch mode.
