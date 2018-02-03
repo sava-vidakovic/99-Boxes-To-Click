@@ -49,6 +49,7 @@ class Game extends Component {
   }
 
   onCellClick(cell) {
+    console.log(cell)
     const { startGame, gameStarted, startTimer } = this.props;
     if(gameStarted) {
       this.closeCell(cell);

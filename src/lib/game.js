@@ -59,6 +59,16 @@ export const availableCells = grid => {
   return available;
 }
 
+export const incompletedCells = grid => {
+  let incompleted = [];
+  eachCell(grid, cell => {
+    if(cell.filled && !cell.completed) {
+      incompleted.push(cell)
+    }
+  })
+  return incompleted;
+}
+
 export const eachCell = (grid, callback) => {
   for(let x = 0; x < grid.length; x++) {
     for(let y = 0; y < grid.length; y++) {
@@ -73,25 +83,15 @@ export const inRange = (grid, selectedCell) => {
 
   eachCell(grid, cell => {
 
-    if((cell.position.x === x || cell.position.y === y) && distance(selectedCell, cell) === 3 ) {
+    if((cell.position.x === x || cell.position.y === y) && distance(selectedCell, cell) === 2 ) {
       inRange.push(cell);
     }
 
-    if((cell.position.x !== x && cell.position.y !== y) && distance(selectedCell, cell) === 2 ) {
+    if((cell.position.x !== x && cell.position.y !== y) && distance(selectedCell, cell) === 1 ) {
       inRange.push(cell);
     }
   })
   return inRange;
-}
-
-export const incompletedCells = grid => {
-  let incompleted = [];
-  eachCell(grid, cell => {
-    if(cell.filled && !cell.completed) {
-      incompleted.push(cell)
-    }
-  })
-  return incompleted;
 }
 
 export const distance = (from, to) => {
@@ -100,11 +100,11 @@ export const distance = (from, to) => {
   const x2 = to.position.x;
   const y2 = to.position.y;
   if(x1 === x2) {
-    return Math.abs(y1-y2);
+    return Math.abs(y1-y2) - 1;
   }
   else if(y1 === y2) {
-    return Math.abs(x1-x2);
+    return Math.abs(x1-x2) - 1;
   } else{
-    return Math.hypot(x2-x1, y2-y1) / Math.sqrt(2);
+    return Math.hypot(x2-x1, y2-y1) / Math.sqrt(2) - 1;
   }
 }
