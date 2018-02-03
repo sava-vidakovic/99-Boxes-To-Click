@@ -3,6 +3,7 @@
 Relaxing puzzle game to help you zone out from the world.
 
 <img src="https://raw.githubusercontent.com/sava-vidakovic/99-Boxes-To-Click/master/screenshot.jpg" width="300">
+
 ## Installing / Getting started
 
 ### Prerequisites
