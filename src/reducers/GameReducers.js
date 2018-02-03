@@ -14,22 +14,23 @@ import { generateGrid } from '../lib/game';
 import LocalStorage from '../lib/localStorage';
 
 const startLevel = parseInt(process.env.REACT_APP_START_LEVEL, 10) || 1;
-const maxLevel = LocalStorage.getMaxLevel();
 
-if(startLevel > maxLevel) {
+if(startLevel > LocalStorage.getMaxLevel()) {
   LocalStorage.saveMaxLevel(startLevel);
 }
 
-const INITIAL_STATE = {
-  grid: generateGrid(),
-  started: false,
-  lives: 1,
-  level: startLevel,
-  maxLevel: maxLevel,
-  currentActive: null,
+const INITIAL_STATE = () => {
+  return {
+    grid: generateGrid(),
+    started: false,
+    lives: 1,
+    level: startLevel,
+    maxLevel: LocalStorage.getMaxLevel(),
+    currentActive: null,
+  }
 };
 
-export default (state = INITIAL_STATE, action) => {
+export default (state = INITIAL_STATE(), action) => {
   switch (action.type) {
     case GRID_CHANGED:
       return { ...state, grid: action.payload };
@@ -44,7 +45,7 @@ export default (state = INITIAL_STATE, action) => {
     case SET_LEVEL:
       return { ...state, level: action.payload }  
     case GAME_OVER:
-      return { ...state, ...INITIAL_STATE };
+      return { ...state, ...INITIAL_STATE() };
     case ADD_LIFE:
       return { ...state, lives: action.payload + state.lives };
     case SET_ACTIVE:
