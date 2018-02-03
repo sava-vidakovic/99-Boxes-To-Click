@@ -161,6 +161,7 @@ module.exports = {
           /\.jpe?g$/,
           /\.png$/,
           /\.scss$/,
+          /\.mp3$/
         ],
         loader: require.resolve('file-loader'),
         options: {
@@ -178,6 +179,13 @@ module.exports = {
           name: 'static/media/[name].[hash:8].[ext]',
         },
       },
+      {
+        test: /\.mp3$/,
+        loader: 'file-loader',
+        query: {
+           name: 'static/media/[name].[hash:8].[ext]'
+        }
+      },      
       // Process JS with Babel.
       {
         test: /\.(js|jsx)$/,

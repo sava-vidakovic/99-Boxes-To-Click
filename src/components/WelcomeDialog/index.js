@@ -4,16 +4,22 @@ import swal from 'sweetalert';
 import _ from 'lodash';
 
 const WelcomeDialog = ({show, onConfirm, maxLevel, onLevelSelected, defaultLevel}) => {
-  let errorMessage = '';
+  let levelMessage = '';
   if(maxLevel === defaultLevel) {
-    errorMessage = `You can only play level ${defaultLevel}`;
+    levelMessage = `You can start from level ${defaultLevel}`;
   } else {
-    errorMessage = `You can select level ${defaultLevel} to ${maxLevel}`;
+    levelMessage = `You can pick levels from ${defaultLevel} to ${maxLevel}.`;
   }
+
+  const welcomeMessage = `Select Level and try click on all available boxes! 
+                          <br /> 
+                          ${levelMessage} <br />
+                          Good Luck!`;
+
   return (
     <SweetAlert
       show={show}
-      title="Welcome!"
+      title=""
       html={true}
       type="input"
       inputType="number"
@@ -23,10 +29,10 @@ const WelcomeDialog = ({show, onConfirm, maxLevel, onLevelSelected, defaultLevel
         if (_.inRange(level, defaultLevel, maxLevel+1)) {
           onLevelSelected(parseInt(level, 10));
         } else {
-          swal.showInputError(errorMessage);
+          swal.showInputError(levelMessage);
         }
       }}
-      text="Select Level and Try click on all available boxes! <br/> Good Luck!"
+      text={welcomeMessage}
     />
   )
 }

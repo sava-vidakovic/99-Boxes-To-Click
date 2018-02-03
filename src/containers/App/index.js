@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import styles from './App.scss';
-import Grid from '../Grid';
+import Game from '../Game';
 import GameStats from '../GameStats';
 import WelcomeDialog from '../../components/WelcomeDialog';
 import LevelCompletedDialog from '../../components/LevelCompletedDialog';
@@ -38,7 +38,7 @@ class App extends Component {
 
     return (
       <div className={styles.app}>
-        <Grid />
+        <Game />
         <GameStats />
         <WelcomeDialog 
           show={showWelcomeDialog}

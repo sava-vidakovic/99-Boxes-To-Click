@@ -1,35 +1,45 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import styles from './Grid';
+import styles from './Game';
 import Cell from '../../components/Cell';
-import { startGame, closeCell, startTimer, completeLevel, levelFailed } from '../../actions';
-import { getPossibleMoves, getIncompleteCells } from '../../selectors'
+import { startGame, closeCell, startTimer, completeLevel, levelLost } from '../../actions';
+import { getPossibleMoves, getIncompleteCells } from '../../selectors';
+import buttonTapSound from '../../sounds/buttonTap.mp3';
+import levelLostSound from '../../sounds/levelLost.mp3';
+import levelPassedSound from '../../sounds/levelPassed.mp3';
+import boxAppearSound from '../../sounds/boxAppear.mp3';
 
-class Grid extends Component {
+class Game extends Component {
 
   constructor(props) {
     super(props);
     this.onCellClick = this.onCellClick.bind(this);
     this.canClick = this.canClick.bind(this);
+    this.buttonTapSound = new Audio(buttonTapSound);
+    this.levelLostSound = new Audio(levelLostSound);
+    this.levelPassedSound = new Audio(levelPassedSound);
+    this.boxAppearSound = new Audio(boxAppearSound);
   }
 
   componentDidUpdate() {
     this.completeLevel();
-    this.gameOver();
+    this.levelLost();
   }
 
   completeLevel() {
     const { gameStarted, possibleMoves, leftCells, completeLevel } = this.props;
     if(gameStarted && possibleMoves.length === 0 && leftCells === 0) {
       completeLevel();
+      this.levelPassedSound.play();
     }
   }
 
-  gameOver() {
-    const { gameStarted, possibleMoves, leftCells, levelFailed } = this.props;
+  levelLost() {
+    const { gameStarted, possibleMoves, leftCells, levelLost } = this.props;
     if(gameStarted && possibleMoves.length === 0 && leftCells > 0) {
-      levelFailed();
+      levelLost();
+      this.levelLostSound.play();
     }
   }
 
@@ -45,11 +55,13 @@ class Grid extends Component {
     } else {
       startGame(cell);
       startTimer();
+      this.boxAppearSound.play();
     }
   }
 
   closeCell(cell) {
     if(this.canClick(cell)) {
+      this.buttonTapSound.play();
       this.props.closeCell(cell);
     }
   }
@@ -106,5 +118,5 @@ export default connect(mapStateToProps, {
     closeCell, 
     startTimer, 
     completeLevel,
-    levelFailed,
-})(Grid);
+    levelLost,
+})(Game);

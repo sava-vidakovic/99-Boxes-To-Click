@@ -77,7 +77,7 @@ export const completeLevel = () => (dispatch, getState) => {
   dispatch(setMaxLevel(game.level));
 }
 
-export const levelFailed = () => (dispatch, getState) => {
+export const levelLost = () => (dispatch, getState) => {
   const state = getState();
   const { lives, } = state.game;
   const incompletedCells = getIncompleteCells(state);
