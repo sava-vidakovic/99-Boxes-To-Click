@@ -6,7 +6,7 @@ import {
   availableCells,
   distance,
   inRange
-} from './game';
+} from '../lib/game';
 
 let grid;
 let cell;
