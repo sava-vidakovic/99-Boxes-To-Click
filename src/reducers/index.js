@@ -7,4 +7,4 @@ export default combineReducers({
   game: GameReducer,
   timer: TimerReducer,
   dialogs: DialogReducer,
-})
+});

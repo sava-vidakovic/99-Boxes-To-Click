@@ -1,21 +1,18 @@
-import { createSelector } from 'reselect'
+import { createSelector } from 'reselect';
 import { inRange, incompletedCells } from '../lib/game';
 
 const getGrid = state => state.game.grid;
 const getActiveCell = state => state.game.currentActive;
 export const getCompletedLevel = state => state.game.level - 1;
 
-export const getPossibleMoves = createSelector(
-  [ getGrid, getActiveCell ], (grid, activeCell) => {
-    if(!activeCell) return ;
+export const getPossibleMoves = createSelector([getGrid, getActiveCell], (grid, activeCell) => {
+  if (activeCell) {
     return inRange(grid, activeCell)
       .filter(cell => cell.filled && !cell.completed)
       .map(cell => cell.key);
-  } 
-)
+  }
+  return [];
+});
 
-export const getIncompleteCells = createSelector(
-  [ getGrid ], (grid) => incompletedCells(grid).length
-)
-
-
+export const getIncompleteCells = createSelector([getGrid], grid =>
+  incompletedCells(grid).length);

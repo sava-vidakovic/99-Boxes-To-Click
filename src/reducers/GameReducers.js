@@ -15,12 +15,12 @@ import LocalStorage from '../lib/localStorage';
 
 const startLevel = parseInt(process.env.REACT_APP_START_LEVEL, 10) || 1;
 
-if(startLevel > LocalStorage.getMaxLevel()) {
+if (startLevel > LocalStorage.getMaxLevel()) {
   LocalStorage.saveMaxLevel(startLevel);
 }
 
-const INITIAL_STATE = () => {
-  return {
+const INITIAL_STATE = () => (
+  {
     grid: generateGrid(),
     started: false,
     lives: 1,
@@ -28,7 +28,7 @@ const INITIAL_STATE = () => {
     maxLevel: LocalStorage.getMaxLevel(),
     currentActive: null,
   }
-};
+);
 
 export default (state = INITIAL_STATE(), action) => {
   switch (action.type) {
@@ -37,13 +37,17 @@ export default (state = INITIAL_STATE(), action) => {
     case LEVEL_STARTED:
       return { ...state, started: true };
     case LEVEL_COMPLETED:
-      return { ...state, started: false, level: state.level + 1, grid: generateGrid(), currentActive: null };
+      return {
+        ...state, started: false, level: state.level + 1, grid: generateGrid(), currentActive: null,
+      };
     case LEVEL_FAILED:
-      return { ...state, started: false, grid: generateGrid(), currentActive: null, lives: action.payload};
+      return {
+        ...state, started: false, grid: generateGrid(), currentActive: null, lives: action.payload,
+      };
     case UPDATE_MAX_LEVEL:
-      return { ...state, maxLevel: action.payload}
+      return { ...state, maxLevel: action.payload };
     case SET_LEVEL:
-      return { ...state, level: action.payload }  
+      return { ...state, level: action.payload };
     case GAME_OVER:
       return { ...state, ...INITIAL_STATE() };
     case ADD_LIFE:
@@ -53,4 +57,4 @@ export default (state = INITIAL_STATE(), action) => {
     default:
       return state;
   }
-}
+};

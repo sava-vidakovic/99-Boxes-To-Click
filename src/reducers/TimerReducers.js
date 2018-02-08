@@ -7,7 +7,7 @@ import {
 
 const INITIAL_STATE = {
   time: 0,
-  started: false
+  started: false,
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -21,4 +21,4 @@ export default (state = INITIAL_STATE, action) => {
     default:
       return state;
   }
-}
+};

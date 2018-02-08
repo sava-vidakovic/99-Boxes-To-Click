@@ -1,8 +1,8 @@
 import _ from 'lodash';
-import { 
+import {
   GRID_CHANGED,
   SET_ACTIVE,
-  LEVEL_STARTED, 
+  LEVEL_STARTED,
   LEVEL_COMPLETED,
   LEVEL_FAILED,
   SET_LEVEL,
@@ -15,36 +15,21 @@ import LocalStorage from '../lib/localStorage';
 import { stopTimer } from './TimerActions';
 import { getIncompleteCells } from '../selectors';
 
-const gridChanged = grid => {
-  return {
-    type: GRID_CHANGED,
-    payload: grid
-  }
-}
+const gridChanged = grid => ({ type: GRID_CHANGED, payload: grid });
 
-const setActive = cell => {
-  return {
-    type: SET_ACTIVE,
-    payload: cell
-  }
-}
+const setActive = cell => ({ type: SET_ACTIVE, payload: cell });
 
-export const setLevel = level => {
-  return {
-    type: SET_LEVEL,
-    payload: level,
-  }
-}
+export const setLevel = level => ({ type: SET_LEVEL, payload: level });
 
 const setMaxLevel = currentLevel => (dispatch, getState) => {
-  const maxLevel = getState().game.maxLevel;
+  const { maxLevel } = getState().game;
   const level = currentLevel > maxLevel ? currentLevel : maxLevel;
   LocalStorage.saveMaxLevel(level);
   dispatch({
     type: UPDATE_MAX_LEVEL,
     payload: level,
-  })
-}
+  });
+};
 
 export const startGame = cell => (dispatch, getState) => {
   const { grid, level } = getState().game;
@@ -56,18 +41,18 @@ export const startGame = cell => (dispatch, getState) => {
   dispatch({ type: LEVEL_STARTED });
   dispatch(gridChanged(gameGrid));
   dispatch(setActive(cell));
-}
+};
 
 export const closeCell = cell => (dispatch, getState) => {
   const { game } = getState();
   const { grid } = game;
-  let gameGrid = _.cloneDeep(grid);
+  const gameGrid = _.cloneDeep(grid);
   const { x, y } = cell.position;
   gameGrid[x][y].filled = true;
   gameGrid[x][y].completed = true;
   dispatch(setActive(cell));
   dispatch(gridChanged(gameGrid));
-}
+};
 
 export const completeLevel = () => (dispatch, getState) => {
   dispatch({ type: LEVEL_COMPLETED });
@@ -75,18 +60,17 @@ export const completeLevel = () => (dispatch, getState) => {
   dispatch(stopTimer());
   const { game } = getState();
   dispatch(setMaxLevel(game.level));
-}
+};
 
 export const levelLost = () => (dispatch, getState) => {
   const state = getState();
-  const { lives, } = state.game;
+  const { lives } = state.game;
   const incompletedCells = getIncompleteCells(state);
   const newLives = lives - incompletedCells;
   dispatch(stopTimer());
-  if(newLives <= 0) {
+  if (newLives <= 0) {
     dispatch({ type: GAME_OVER });
-  } else{
+  } else {
     dispatch({ type: LEVEL_FAILED, payload: newLives });
   }
-
-}
+};
