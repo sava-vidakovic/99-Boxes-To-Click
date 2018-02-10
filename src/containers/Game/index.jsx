@@ -7,10 +7,10 @@ import Cell from '../../components/Cell';
 import { startGame, closeCell, startTimer, completeLevel, levelLost } from '../../actions';
 import { getPossibleMoves, getIncompleteCells } from '../../selectors';
 import SharedPropTypes from '../../constants/SharedPropTypes';
-import buttonTapSound from '../../sounds/buttonTap.mp3';
-import levelLostSound from '../../sounds/levelLost.mp3';
-import levelPassedSound from '../../sounds/levelPassed.mp3';
-import boxAppearSound from '../../sounds/boxAppear.mp3';
+import buttonTapSound from '../../assets/sounds/buttonTap.mp3';
+import levelLostSound from '../../assets/sounds/levelLost.mp3';
+import levelPassedSound from '../../assets/sounds/levelPassed.mp3';
+import boxAppearSound from '../../assets/sounds/boxAppear.mp3';
 
 class Game extends Component {
   constructor(props) {
