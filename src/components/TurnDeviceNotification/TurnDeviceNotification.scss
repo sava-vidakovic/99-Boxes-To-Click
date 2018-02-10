@@ -1,0 +1,11 @@
+.turnDeviceNotification {
+  position:fixed;
+  top: 0;
+  left:0;
+  height:100%;
+  width:100%;
+  z-index: 999999;
+  background-image:url('../../assets/images/turnDevice.png');
+  background-size:cover;
+  background-position: center;
+}
