@@ -77,37 +77,26 @@ class Game extends Component {
     }
   }
 
-  renderCells(row) {
-    const { gameStarted, currentActiveCell } = this.props;
-    return row.map(cell => (
-      <Cell
-        key={cell.key}
-        cell={cell}
-        canClick={this.canClick(cell)}
-        onCellClick={this.onCellClick}
-        currentActiveCell={currentActiveCell}
-        gameStarted={gameStarted}
-      />
+  renderCells() {
+    const { gameStarted, currentActiveCell, grid } = this.props;
+    return grid.map(row => (
+      row.map(cell => (
+        <Cell
+          key={cell.key}
+          cell={cell}
+          canClick={this.canClick(cell)}
+          onCellClick={this.onCellClick}
+          currentActiveCell={currentActiveCell}
+          gameStarted={gameStarted}
+        />
+      ))
     ));
-  }
-
-  renderRows() {
-    const { grid } = this.props;
-    /* eslint-disable react/no-array-index-key */
-    return grid.map((row, index) => (
-      <div className={styles['grid-row']} key={index}>
-        { this.renderCells(row) }
-      </div>
-    ));
-    /* eslint-enable react/no-array-index-key */
   }
 
   render() {
     return (
-      <div className={styles.container}>
-        <div className={styles.grid}>
-          {this.renderRows()}
-        </div>
+      <div className={styles.grid}>
+        {this.renderCells()}
       </div>
     );
   }

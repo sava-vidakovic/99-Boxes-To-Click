@@ -4,8 +4,9 @@
 .container {
   margin-top: 10px;
   padding: 5px;
-  width: $field-width;
   display: flex;
+  width: $grid-size;
+  min-width: $min-grid-size;
   justify-content: space-between;
 }
 
@@ -25,8 +26,8 @@
 
 @include smaller($mobile-threshold) {
   .container {
-    width: $field-width-mobile;
     flex-direction: column;
+    width: $mobile-grid-size;
   }
   .item {
     margin-bottom: 15px;

@@ -9,6 +9,7 @@ import WelcomeDialog from '../../components/WelcomeDialog';
 import LevelCompletedDialog from '../../components/LevelCompletedDialog';
 import LevelFailedDialog from '../../components/LevelFailedDialog/';
 import GameOverDialog from '../../components/GameOverDialog';
+import TurnDeviceNotification from '../../components/TurnDeviceNotification';
 import { toggleDialog, setLevel } from '../../actions';
 import { getCompletedLevel, getIncompleteCells } from '../../selectors';
 
@@ -27,6 +28,7 @@ class App extends Component {
   render() {
     return (
       <div className={styles.app}>
+        <TurnDeviceNotification />
         <Game />
         <GameStats
           time={this.props.time}

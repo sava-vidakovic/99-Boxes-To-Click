@@ -1,8 +1,7 @@
 @import './_mixins';
 
-$field-width: 500px;
-$field-width-mobile: 300px;
-$grid-row-cells: 10;
-$grid-spacing: 5px;
 $font-color: #776e65;
-$mobile-threshold: $field-width + 20px;
+$mobile-threshold: 740px;
+$grid-size: 70vh;
+$mobile-grid-size: 40vh;
+$min-grid-size: 320px;
