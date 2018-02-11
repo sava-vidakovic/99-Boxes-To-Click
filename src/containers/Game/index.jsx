@@ -12,7 +12,7 @@ import levelLostSound from '../../assets/sounds/levelLost.mp3';
 import levelPassedSound from '../../assets/sounds/levelPassed.mp3';
 import boxAppearSound from '../../assets/sounds/boxAppear.mp3';
 
-class Game extends Component {
+export class Game extends Component {
   constructor(props) {
     super(props);
     this.onCellClick = this.onCellClick.bind(this);
@@ -50,7 +50,6 @@ class Game extends Component {
       possibleMoves,
       leftCells,
     } = this.props;
-
     if (gameStarted && possibleMoves.length === 0 && leftCells > 0) {
       this.props.levelLost();
       this.levelLostSound.play();
@@ -63,7 +62,6 @@ class Game extends Component {
       possibleMoves,
       leftCells,
     } = this.props;
-
     if (gameStarted && possibleMoves.length === 0 && leftCells === 0) {
       this.props.completeLevel();
       this.levelPassedSound.play();

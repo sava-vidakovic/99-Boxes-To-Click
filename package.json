@@ -109,7 +109,10 @@
     "extends": [
       "react-app",
       "airbnb"
-    ]
+    ],
+    "rules": {
+      "import/no-named-as-default": "off"
+    }
   },
   "devDependencies": {
     "eslint-config-airbnb": "^16.1.0"
