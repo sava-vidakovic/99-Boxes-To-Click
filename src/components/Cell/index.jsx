@@ -33,8 +33,8 @@ const Cell = ({
 }) => (
   <div
     role="presentation"
-    onKeyPress={this.handleKeyPress}
-    className={[getClasses(cell, gameStarted, currentActiveCell, canClick)]}
+    onKeyPress={() => (false)}
+    className={getClasses(cell, gameStarted, currentActiveCell, canClick)}
     onClick={() => onCellClick(cell)}
   />
 );
