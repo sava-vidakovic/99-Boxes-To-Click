@@ -20,3 +20,11 @@ Object.assign = require('object-assign');
 if (process.env.NODE_ENV === 'test') {
   require('raf').polyfill(global);
 }
+
+// Simulate device oritentation
+global.window.rotate = (angle) => {
+  global.window.orientation = angle;
+  global.window.dispatchEvent(new Event('orientationchange'));
+};
+
+global.window.orientation = 0;

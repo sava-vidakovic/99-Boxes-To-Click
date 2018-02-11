@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "react-app",
+    "airbnb"
+  ],
+  "rules": {
+    // "quotes": [ 2, "single" ]
+    "react/jsx-filename-extension": [0]
+  }
+}
